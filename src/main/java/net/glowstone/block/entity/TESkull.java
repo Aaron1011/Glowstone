@@ -34,11 +34,9 @@ public class TESkull extends TileEntity {
 
     @Override
     public void update(GlowPlayer player) {
-        /*CompoundTag nbt = new CompoundTag();
+        CompoundTag nbt = new CompoundTag();
         saveNbt(nbt);
-        player.sendSkullChange(getBlock().getLocation(), nbt)
-        not sure what this is accomplishing
-        */
+        player.sendSkullChange(getBlock().getLocation(), nbt);
     }
 
 }
