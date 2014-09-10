@@ -1,8 +1,27 @@
 package net.glowstone.block;
 
-import net.glowstone.block.blocktype.*;
+import net.glowstone.block.blocktype.BlockChest;
+import net.glowstone.block.blocktype.BlockDirectDrops;
+import net.glowstone.block.blocktype.BlockDoubleSlab;
+import net.glowstone.block.blocktype.BlockDropless;
+import net.glowstone.block.blocktype.BlockEnderchest;
+import net.glowstone.block.blocktype.BlockGravel;
+import net.glowstone.block.blocktype.BlockHugeMushroom;
+import net.glowstone.block.blocktype.BlockLeaves;
+import net.glowstone.block.blocktype.BlockMelon;
+import net.glowstone.block.blocktype.BlockMelonStem;
+import net.glowstone.block.blocktype.BlockMobSpawner;
+import net.glowstone.block.blocktype.BlockNote;
+import net.glowstone.block.blocktype.BlockPumpkinStem;
+import net.glowstone.block.blocktype.BlockRandomDrops;
+import net.glowstone.block.blocktype.BlockSign;
+import net.glowstone.block.blocktype.BlockSkull;
+import net.glowstone.block.blocktype.BlockTallGrass;
+import net.glowstone.block.blocktype.BlockType;
+import net.glowstone.block.blocktype.BlockWorkbench;
 import net.glowstone.block.itemtype.ItemPlaceAs;
 import net.glowstone.block.itemtype.ItemSign;
+import net.glowstone.block.itemtype.ItemSkull;
 import net.glowstone.block.itemtype.ItemType;
 import org.bukkit.Material;
 
@@ -109,6 +128,7 @@ public final class ItemTable {
         reg(Material.LOG_2, new BlockLog2());
         reg(Material.LADDER, new BlockLadder());
         reg(Material.VINE, new BlockVine());
+        reg(Material.SKULL, new BlockSkull());
 
         reg(Material.SIGN, new ItemSign());
         reg(Material.REDSTONE, new ItemPlaceAs(Material.REDSTONE_WIRE));
@@ -119,6 +139,7 @@ public final class ItemTable {
         reg(Material.FLOWER_POT_ITEM, new ItemPlaceAs(Material.FLOWER_POT));
         reg(Material.SKULL_ITEM, new ItemPlaceAs(Material.SKULL));
         reg(Material.REDSTONE_COMPARATOR, new ItemPlaceAs(Material.REDSTONE_COMPARATOR_OFF));
+        reg(Material.SKULL_ITEM, new ItemSkull());
     }
 
     private void reg(Material material, ItemType type) {
