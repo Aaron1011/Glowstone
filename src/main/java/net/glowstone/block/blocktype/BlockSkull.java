@@ -22,6 +22,8 @@ import java.util.Map;
 public class BlockSkull extends BlockType {
 
     private final static Map<Location, SkullType> skullTypes = Collections.synchronizedMap(new HashMap<Location, SkullType>());
+    private final static Map<Location, Byte> skullRots = Collections.synchronizedMap(new HashMap<Location, Byte>());
+
 
     /**
      * Gets the SkullType placed at the given Location and removes it from the internal Map.
@@ -42,6 +44,19 @@ public class BlockSkull extends BlockType {
         }
     }
 
+    public static Byte getSkullRot(final Location l) {
+        Validate.notNull(l, "Location cannot be null");
+        synchronized (skullRots) {
+           return skullRots.remove(l);
+        }
+    }
+
+    private static void setSkullRot(final Location l, final byte skullRot) {
+        synchronized (skullRots) {
+            skullRots.put(l, skullRot);
+        }
+    }
+
     public BlockSkull() {
         setDrops(new ItemStack(Material.SKULL_ITEM));
     }
@@ -50,7 +65,7 @@ public class BlockSkull extends BlockType {
         return new TESkull(chunk.getBlock(cx, cy, cz));
     }
 
-    public boolean isWallSkull(BlockFace face) {
+    public static boolean isWallSkull(BlockFace face) {
         return face == BlockFace.EAST || face == BlockFace.WEST || face == BlockFace.SOUTH || face == BlockFace.NORTH;
     }
 
@@ -63,7 +78,15 @@ public class BlockSkull extends BlockType {
             return;
         }
         final Skull s = (Skull) data;
-        s.setFacingDirection(getFacing(player.getLocation(), face));
+        if (isWallSkull(face)) {
+            s.setFacingDirection(face);
+        }
+        else {
+            Location loc = player.getLocation();
+            int rot = (int) Math.floor(loc.getYaw() * 16.0F / 360.0F + 0.5D);
+            setSkullRot(state.getLocation(), (byte) (rot & 0xFF));
+            s.setFacingDirection(BlockFace.UP);
+        }
         setSkullType(state.getLocation(), getSkullType(holding.getDurability()));
     }
 
