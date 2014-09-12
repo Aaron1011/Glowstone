@@ -23,6 +23,7 @@ import net.glowstone.net.message.play.game.*;
 import net.glowstone.net.message.play.inv.*;
 import net.glowstone.net.message.play.player.PlayerAbilitiesMessage;
 import net.glowstone.net.protocol.ProtocolType;
+import net.glowstone.util.nbt.CompoundTag;
 import net.glowstone.util.StatisticMap;
 import net.glowstone.util.TextWrapper;
 import org.apache.commons.lang.Validate;
