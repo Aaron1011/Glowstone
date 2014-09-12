@@ -1298,7 +1298,7 @@ public final class GlowPlayer extends GlowHumanEntity implements Player {
         Validate.notNull(location, "location cannot be null");
         Validate.notNull(nbt, "nbt cannot be null");
 
-        afterBlockChanges.add(new UpdateBlockEntityMessage((int) location.getX(), (int) location.getY(), (int) location.getZ(), 6, nbt));
+        afterBlockChanges.add(new UpdateBlockEntityMessage((int) location.getX(), (int) location.getY(), (int) location.getZ(), 4, nbt));
     }
 
     @Override
