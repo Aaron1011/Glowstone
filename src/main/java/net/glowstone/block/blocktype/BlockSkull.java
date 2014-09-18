@@ -1,15 +1,14 @@
 package net.glowstone.block.blocktype;
 
 import net.glowstone.GlowChunk;
-import net.glowstone.GlowServer;
 import net.glowstone.block.GlowBlock;
 import net.glowstone.block.GlowBlockState;
 import net.glowstone.block.entity.TESkull;
 import net.glowstone.block.entity.TileEntity;
 import net.glowstone.block.state.GlowSkull;
 import net.glowstone.entity.GlowPlayer;
-import net.glowstone.entity.meta.PlayerProfile;
-import org.bukkit.Bukkit;
+import net.glowstone.entity.meta.profile.PlayerProfile;
+import net.glowstone.entity.meta.profile.ProfileCache;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
@@ -95,8 +94,8 @@ public class BlockSkull extends BlockType {
     public static PlayerProfile getProfile(String name) {
         if(name == null || name.length() > MAX_OWNER_LENGTH || name.isEmpty()) return null;
 
-        UUID uuid = ((GlowServer) Bukkit.getServer()).getPlayerDataService().lookupUUID(name);
-        return new PlayerProfile(name, uuid);
+        UUID uuid = ProfileCache.getUUID(name);
+        return ProfileCache.getProfile(uuid);
     }
 
     public static BlockFace getRotation(byte rotation) {

@@ -6,7 +6,7 @@ import net.glowstone.block.GlowBlockState;
 import net.glowstone.block.blocktype.BlockSkull;
 import net.glowstone.block.state.GlowSkull;
 import net.glowstone.entity.GlowPlayer;
-import net.glowstone.entity.meta.PlayerProfile;
+import net.glowstone.entity.meta.profile.PlayerProfile;
 import net.glowstone.util.nbt.CompoundTag;
 import org.bukkit.Bukkit;
 import org.bukkit.SkullType;
@@ -29,7 +29,10 @@ public class TESkull extends TileEntity {
     public void loadNbt(CompoundTag tag) {
         super.loadNbt(tag);
         type = tag.getByte("SkullType");
-        rotation = tag.getByte("Rot");
+
+        if (BlockSkull.canRotate((Skull) getBlock().getState().getData())) {
+            rotation = tag.getByte("Rot");
+        }
         if(tag.containsKey("Owner")) {
             CompoundTag ownerTag = tag.getCompound("Owner");
             owner = PlayerProfile.fromNBT(ownerTag);

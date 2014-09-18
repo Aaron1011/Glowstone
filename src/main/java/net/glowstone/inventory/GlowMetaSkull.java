@@ -2,7 +2,7 @@ package net.glowstone.inventory;
 
 import net.glowstone.GlowServer;
 import net.glowstone.block.blocktype.BlockSkull;
-import net.glowstone.entity.meta.PlayerProfile;
+import net.glowstone.entity.meta.profile.PlayerProfile;
 import net.glowstone.util.nbt.CompoundTag;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -43,6 +43,14 @@ public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
         result.put("meta-type", "SKULL");
         if(hasOwner()) {
             result.put("owner", owner);
+        }
+        return result;
+    }
+
+    public static GlowMetaSkull deserialize(Map<String, Object> data) {
+        GlowMetaSkull result = new GlowMetaSkull(null);
+        if (data.containsKey("owner")) {
+            result.owner = (PlayerProfile) data.get("owner");
         }
         return result;
     }
