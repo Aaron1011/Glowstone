@@ -32,6 +32,11 @@ public class BlockSkull extends BlockType {
     }
 
     @Override
+    public boolean canPlaceAt(GlowBlock block, BlockFace against) {
+        return BlockFace.DOWN != against; // Skulls can't be placed on bottom of block
+    }
+
+    @Override
     public void placeBlock(GlowPlayer player, GlowBlockState state, BlockFace face, ItemStack holding, Vector clickedLoc) {
         super.placeBlock(player, state, face, holding, clickedLoc);
         MaterialData data = state.getData();
