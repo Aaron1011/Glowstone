@@ -92,7 +92,10 @@ public class PlayerDataFetcher {
     }
 
     public static UUID parseUUIDResponse(JSONArray json) {
-        String uuid = (String) ((JSONObject) json.get(0)).get("id");
-        return UuidUtils.fromFlatString(uuid);    
+        if (json.size() > 0) {
+            String uuid = (String) ((JSONObject) json.get(0)).get("id");
+            return UuidUtils.fromFlatString(uuid);
+        }
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package net.glowstone.block.blocktype;
 
 import net.glowstone.GlowChunk;
+import net.glowstone.GlowServer;
 import net.glowstone.block.GlowBlock;
 import net.glowstone.block.GlowBlockState;
 import net.glowstone.block.entity.TESkull;
@@ -100,7 +101,11 @@ public class BlockSkull extends BlockType {
         if(name == null || name.length() > MAX_OWNER_LENGTH || name.isEmpty()) return null;
 
         UUID uuid = ProfileCache.getUUID(name);
-        return ProfileCache.getProfile(uuid);
+        if (uuid != null) {
+            return ProfileCache.getProfile(uuid);
+        }
+        GlowServer.logger.warning("Unable to get UUID for player " + name);
+        return null;
     }
 
     public static BlockFace getRotation(byte rotation) {
