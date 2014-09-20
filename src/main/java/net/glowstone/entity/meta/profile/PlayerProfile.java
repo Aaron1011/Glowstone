@@ -83,14 +83,14 @@ public final class PlayerProfile {
         profileTag.putString("Name", name);
 
         CompoundTag propertiesTag = new CompoundTag();
-        for(PlayerProperty property : properties) {
+        for (PlayerProperty property : properties) {
             CompoundTag propertyValueTag = new CompoundTag();
             propertyValueTag.putString("Signature", property.getSignature());
             propertyValueTag.putString("Value", property.getValue());
 
             propertiesTag.putCompoundList(property.getName(), Arrays.asList(propertyValueTag));
         }
-        if(!propertiesTag.isEmpty()) { // Only add properties if not empty
+        if (!propertiesTag.isEmpty()) { // Only add properties if not empty
             profileTag.putCompound("Properties", propertiesTag);
         }
         return profileTag;
@@ -102,8 +102,8 @@ public final class PlayerProfile {
         String name = tag.getString("Name");
 
         List<PlayerProperty> properties = new ArrayList<>();
-        if(tag.containsKey("Properties")) {
-            for(Map.Entry<String, Tag> property : tag.getCompound("Properties").getValue().entrySet()) {
+        if (tag.containsKey("Properties")) {
+            for (Map.Entry<String, Tag> property : tag.getCompound("Properties").getValue().entrySet()) {
                 Tag propertyTag = property.getValue();
                 CompoundTag propertyValueTag = ((List<CompoundTag>) property.getValue().getValue()).get(0);
                 properties.add(new PlayerProperty(property.getKey(), propertyValueTag.getString("Value"), propertyValueTag.getString("Signature")));

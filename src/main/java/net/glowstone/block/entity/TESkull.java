@@ -33,13 +33,13 @@ public class TESkull extends TileEntity {
         if (BlockSkull.canRotate((Skull) getBlock().getState().getData())) {
             rotation = tag.getByte("Rot");
         }
-        if(tag.containsKey("Owner")) {
+        if (tag.containsKey("Owner")) {
             CompoundTag ownerTag = tag.getCompound("Owner");
             owner = PlayerProfile.fromNBT(ownerTag);
-        } else if(tag.containsKey("ExtraType")) {
+        } else if (tag.containsKey("ExtraType")) {
             // Pre-1.8 uses just a name, instead of a profile object
             String name = tag.getString("ExtraType");
-            if(name != null && !name.isEmpty()) {
+            if (name != null && !name.isEmpty()) {
                 UUID uuid = ((GlowServer) Bukkit.getServer()).getPlayerDataService().lookupUUID(name);
                 owner = new PlayerProfile(name, uuid);
             }
@@ -53,7 +53,7 @@ public class TESkull extends TileEntity {
         if (BlockSkull.canRotate((Skull) getBlock().getState().getData())) {
             tag.putByte("Rot", rotation);
         }
-        if(type == BlockSkull.getType(SkullType.PLAYER) && owner != null) {
+        if (type == BlockSkull.getType(SkullType.PLAYER) && owner != null) {
             tag.putCompound("Owner", owner.toNBT());
         }
     }

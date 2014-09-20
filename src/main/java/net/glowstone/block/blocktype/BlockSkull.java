@@ -41,7 +41,7 @@ public class BlockSkull extends BlockType {
     public void placeBlock(GlowPlayer player, GlowBlockState state, BlockFace face, ItemStack holding, Vector clickedLoc) {
         super.placeBlock(player, state, face, holding, clickedLoc);
         MaterialData data = state.getData();
-        if(!(data instanceof Skull)) {
+        if (!(data instanceof Skull)) {
             warnMaterialData(Skull.class, data);
             return;
         }
@@ -58,20 +58,20 @@ public class BlockSkull extends BlockType {
     public void afterPlace(GlowPlayer player, GlowBlock block, ItemStack holding) {
         GlowSkull skull = (GlowSkull) block.getState();
         skull.setSkullType(getType(holding.getDurability()));
-        if(skull.getSkullType() == SkullType.PLAYER) {
+        if (skull.getSkullType() == SkullType.PLAYER) {
             SkullMeta meta = (SkullMeta) holding.getItemMeta();
-            if(meta != null) {
+            if (meta != null) {
                 skull.setOwner(meta.getOwner());
             }
         }
         MaterialData data = skull.getData();
-        if(!(data instanceof Skull)) {
+        if (!(data instanceof Skull)) {
             warnMaterialData(Skull.class, data);
             return;
         }
         Skull skullData = (Skull) data;
 
-        if(skullData.getFacing() == BlockFace.SELF) { // Can be rotated
+        if (skullData.getFacing() == BlockFace.SELF) { // Can be rotated
             // Calculate the rotation based on the player's facing direction
             Location loc = player.getLocation();
             // 22.5 = 360 / 16
@@ -87,7 +87,7 @@ public class BlockSkull extends BlockType {
         GlowSkull skull = (GlowSkull) block.getState();
 
         ItemStack drop = new ItemStack(Material.SKULL_ITEM, 1);
-        if(skull.hasOwner()) {
+        if (skull.hasOwner()) {
             SkullMeta meta = (SkullMeta) drop.getItemMeta();
             meta.setOwner(skull.getOwner());
             drop.setItemMeta(meta);
@@ -98,7 +98,7 @@ public class BlockSkull extends BlockType {
     }
 
     public static PlayerProfile getProfile(String name) {
-        if(name == null || name.length() > MAX_OWNER_LENGTH || name.isEmpty()) return null;
+        if (name == null || name.length() > MAX_OWNER_LENGTH || name.isEmpty()) return null;
 
         UUID uuid = ProfileCache.getUUID(name);
         if (uuid != null) {
@@ -185,7 +185,7 @@ public class BlockSkull extends BlockType {
     }
 
     public static SkullType getType(int id) {
-        if(id >= SkullType.values().length || id < 0) throw new IllegalArgumentException("ID not a Skull type: " + id);
+        if (id >= SkullType.values().length || id < 0) throw new IllegalArgumentException("ID not a Skull type: " + id);
         return SkullType.values()[id];
     }
 

@@ -163,7 +163,7 @@ public final class EncryptionKeyResponseHandler implements MessageHandler<GlowSe
                 }
                 
                 // Spawn in player
-		//
+                //
                 session.getServer().getScheduler().runTask(null, new Runnable() {
                     @Override
                     public void run() {

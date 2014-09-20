@@ -211,7 +211,7 @@ public class GlowInventory implements Inventory {
         HashMap<Integer, ItemStack> result = new HashMap<>();
 
         for (int i = 0; i < items.length; ++i) {
-            ItemStack item = items[i];		
+            ItemStack item = items[i];
             int maxStackSize = items[i].getType() == null ? 64 : items[i].getType().getMaxStackSize();
             int toAdd = items[i].getAmount();
 

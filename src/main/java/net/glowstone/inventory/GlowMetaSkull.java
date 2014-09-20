@@ -17,7 +17,7 @@ public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
 
     public GlowMetaSkull(GlowMetaItem meta) {
         super(meta);
-        if(meta == null || !(meta instanceof GlowMetaSkull)) {
+        if (meta == null || !(meta instanceof GlowMetaSkull)) {
             return;
         }
         GlowMetaSkull skull = (GlowMetaSkull) meta;
@@ -41,7 +41,7 @@ public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
     public Map<String, Object> serialize() {
         Map<String, Object> result = super.serialize();
         result.put("meta-type", "SKULL");
-        if(hasOwner()) {
+        if (hasOwner()) {
             result.put("owner", owner);
         }
         return result;
@@ -58,7 +58,7 @@ public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
     @Override
     void writeNbt(CompoundTag tag) {
         super.writeNbt(tag);
-        if(hasOwner()) {
+        if (hasOwner()) {
             tag.putCompound("SkullOwner", owner.toNBT());
         }
     }
@@ -66,13 +66,13 @@ public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
     @Override
     void readNbt(CompoundTag tag) {
         super.readNbt(tag);
-        if(tag.containsKey("SkullOwner")) {
-            if(tag.isString("SkullOwner")) {
+        if (tag.containsKey("SkullOwner")) {
+            if (tag.isString("SkullOwner")) {
                 String name = tag.getString("SkullOwner");
                 UUID uuid = ((GlowServer) Bukkit.getServer()).getPlayerDataService().lookupUUID(name);
                 owner = new PlayerProfile(name, uuid);
                 //TODO: Use Mojang API to get properties
-            } else if(tag.isCompound("SkullOwner")) {
+            } else if (tag.isCompound("SkullOwner")) {
                 owner = PlayerProfile.fromNBT(tag.getCompound("SkullOwner"));
             }
         }
@@ -97,7 +97,7 @@ public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
     @Override
     public boolean setOwner(String name) {
         PlayerProfile owner = BlockSkull.getProfile(name);
-        if(owner == null) {
+        if (owner == null) {
             return false;
         }
         this.owner = owner;
