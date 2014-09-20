@@ -1,15 +1,12 @@
 package net.glowstone.inventory;
 
-import net.glowstone.GlowServer;
 import net.glowstone.block.blocktype.BlockSkull;
 import net.glowstone.entity.meta.profile.PlayerProfile;
 import net.glowstone.util.nbt.CompoundTag;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Map;
-import java.util.UUID;
 
 public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
 
@@ -68,10 +65,7 @@ public class GlowMetaSkull extends GlowMetaItem implements SkullMeta {
         super.readNbt(tag);
         if (tag.containsKey("SkullOwner")) {
             if (tag.isString("SkullOwner")) {
-                String name = tag.getString("SkullOwner");
-                UUID uuid = ((GlowServer) Bukkit.getServer()).getPlayerDataService().lookupUUID(name);
-                owner = new PlayerProfile(name, uuid);
-                //TODO: Use Mojang API to get properties
+                owner = BlockSkull.getProfile(tag.getString("SkullOwner"));
             } else if (tag.isCompound("SkullOwner")) {
                 owner = PlayerProfile.fromNBT(tag.getCompound("SkullOwner"));
             }

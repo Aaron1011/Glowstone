@@ -1,6 +1,5 @@
 package net.glowstone.block.entity;
 
-import net.glowstone.GlowServer;
 import net.glowstone.block.GlowBlock;
 import net.glowstone.block.GlowBlockState;
 import net.glowstone.block.blocktype.BlockSkull;
@@ -8,11 +7,8 @@ import net.glowstone.block.state.GlowSkull;
 import net.glowstone.entity.GlowPlayer;
 import net.glowstone.entity.meta.profile.PlayerProfile;
 import net.glowstone.util.nbt.CompoundTag;
-import org.bukkit.Bukkit;
 import org.bukkit.SkullType;
 import org.bukkit.material.Skull;
-
-import java.util.UUID;
 
 public class TESkull extends TileEntity {
 
@@ -40,8 +36,7 @@ public class TESkull extends TileEntity {
             // Pre-1.8 uses just a name, instead of a profile object
             String name = tag.getString("ExtraType");
             if (name != null && !name.isEmpty()) {
-                UUID uuid = ((GlowServer) Bukkit.getServer()).getPlayerDataService().lookupUUID(name);
-                owner = new PlayerProfile(name, uuid);
+                owner = BlockSkull.getProfile(name);
             }
         }
     }
