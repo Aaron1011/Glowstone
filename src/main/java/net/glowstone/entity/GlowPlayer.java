@@ -8,6 +8,7 @@ import net.glowstone.block.entity.TileEntity;
 import net.glowstone.constants.GlowAchievement;
 import net.glowstone.constants.GlowEffect;
 import net.glowstone.constants.GlowSound;
+import net.glowstone.constants.GlowBlockEntity;
 import net.glowstone.entity.meta.MetadataIndex;
 import net.glowstone.entity.meta.MetadataMap;
 import net.glowstone.entity.meta.profile.PlayerProfile;
@@ -1320,7 +1321,7 @@ public final class GlowPlayer extends GlowHumanEntity implements Player {
         Validate.notNull(location, "location cannot be null");
         Validate.notNull(nbt, "nbt cannot be null");
 
-        afterBlockChanges.add(new UpdateBlockEntityMessage((int) location.getX(), (int) location.getY(), (int) location.getZ(), 4, nbt));
+        afterBlockChanges.add(new UpdateBlockEntityMessage((int) location.getX(), (int) location.getY(), (int) location.getZ(), GlowBlockEntity.SKULL.getValue(), nbt));
     }
 
     @Override
