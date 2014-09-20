@@ -14,6 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.block.BlockFace;
+import static org.bukkit.block.BlockFace.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.material.MaterialData;
@@ -27,6 +28,12 @@ import java.util.UUID;
 public class BlockSkull extends BlockType {
 
     public static final int MAX_OWNER_LENGTH = 16;
+
+    private static final BlockFace[] ROTATIONS = new BlockFace[]{SOUTH, SOUTH_SOUTH_WEST,
+        SOUTH_WEST, WEST_SOUTH_WEST, WEST, WEST_NORTH_WEST, NORTH_WEST, NORTH_NORTH_WEST,
+        NORTH, NORTH_NORTH_EAST, NORTH_EAST, EAST_NORTH_EAST, EAST, EAST_SOUTH_EAST, SOUTH_EAST, SOUTH_SOUTH_EAST
+    };
+
 
     public BlockSkull() {
         setDrops(new ItemStack(Material.SKULL_ITEM));
@@ -109,79 +116,11 @@ public class BlockSkull extends BlockType {
     }
 
     public static BlockFace getRotation(byte rotation) {
-        switch (rotation) {
-            case 0:
-                return BlockFace.NORTH;
-            case 1:
-                return BlockFace.NORTH_NORTH_EAST;
-            case 2:
-                return BlockFace.NORTH_EAST;
-            case 3:
-                return BlockFace.EAST_NORTH_EAST;
-            case 4:
-                return BlockFace.EAST;
-            case 5:
-                return BlockFace.EAST_SOUTH_EAST;
-            case 6:
-                return BlockFace.SOUTH_EAST;
-            case 7:
-                return BlockFace.SOUTH_SOUTH_EAST;
-            case 8:
-                return BlockFace.SOUTH;
-            case 9:
-                return BlockFace.SOUTH_SOUTH_WEST;
-            case 10:
-                return BlockFace.SOUTH_WEST;
-            case 11:
-                return BlockFace.WEST_SOUTH_WEST;
-            case 12:
-                return BlockFace.WEST;
-            case 13:
-                return BlockFace.WEST_NORTH_WEST;
-            case 14:
-                return BlockFace.NORTH_WEST;
-            case 15:
-                return BlockFace.NORTH_NORTH_WEST;
-        }
-        throw new IllegalArgumentException("Not a valid skull rotation: " + rotation);
+        return ROTATIONS[rotation];
     }
 
     public static byte getRotation(BlockFace rotation) {
-        switch(rotation) {
-            case SOUTH:
-                return 0x0;
-            case SOUTH_SOUTH_WEST:
-                return 0x1;
-            case SOUTH_WEST:
-                return 0x2;
-            case WEST_SOUTH_WEST:
-                return 0x3;
-            case WEST:
-                return 0x4;
-            case WEST_NORTH_WEST:
-                return 0x5;
-            case NORTH_WEST:
-                return 0x6;
-            case NORTH_NORTH_WEST:
-                return 0x7;
-            case NORTH:
-                return 0x8;
-            case NORTH_NORTH_EAST:
-                return 0x9;
-            case NORTH_EAST:
-                return 0xA;
-            case EAST_NORTH_EAST:
-                return 0xB;
-            case EAST:
-                return 0xC;
-            case EAST_SOUTH_EAST:
-                return 0xD;
-            case SOUTH_EAST:
-                return 0xE;
-            case SOUTH_SOUTH_EAST:
-                return 0xF;
-        }
-        throw new IllegalArgumentException("Not a valid skull rotation:" + rotation);
+        return (byte) Arrays.asList(ROTATIONS).indexOf(rotation);
     }
 
     public static SkullType getType(int id) {
